@@ -34,7 +34,7 @@
             @else
             <a href="{{ route('login') }}" class="text-indigo-600 font-semibold hover:text-indigo-800">Masuk</a>
             <a href="/register" class="text-blue-500 text-sm">
-                 Daftar
+                Daftar
             </a> @endauth
             @endif
         </div>
@@ -58,11 +58,10 @@
                 </a>
             </div>
         </div>
-        <div class="md:w-1/2 relative">
+        <!-- <div class="md:w-1/2 relative">
             <div class="absolute -top-10 -left-10 w-72 h-72 bg-indigo-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
             <div class="absolute -bottom-10 -right-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-            <img src="https://illustrations.popsy.co/amber/reading-a-book.svg" alt="Library Illustration" class="relative z-10 w-full transform hover:scale-105 transition duration-500">
-        </div>
+x        </div> -->
     </section>
 
     <section id="features" class="bg-gray-50 py-20">
