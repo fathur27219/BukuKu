@@ -37,6 +37,7 @@
 
       <div class="px-6 md:px-8 py-8 space-y-6">
 
+        <!-- Banner -->
         <section class="rounded-3xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
           <div class="md:flex md:items-center md:justify-between gap-6">
             <div class="max-w-2xl">
@@ -69,15 +70,16 @@
           </div>
         </section>
 
+        <!-- Statistik -->
         <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="rounded-3xl border border-slate-200 bg-white p-5">
             <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">Buku tersedia</p>
-            <p class="mt-3 text-3xl font-semibold text-slate-900">1.240</p>
+            <p class="mt-3 text-3xl font-semibold text-slate-900">{{ $totalBuku }}</p>
             <p class="mt-2 text-sm text-slate-500">Koleksi siap dipinjam untuk siswa.</p>
           </div>
           <div class="rounded-3xl border border-slate-200 bg-white p-5">
             <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">Pinjaman aktif</p>
-            <p class="mt-3 text-3xl font-semibold text-slate-900">42</p>
+            <p class="mt-3 text-3xl font-semibold text-slate-900">{{ $jumlahPinjaman }}</p>
             <p class="mt-2 text-sm text-slate-500">Pinjaman yang sedang berjalan.</p>
           </div>
           <div class="rounded-3xl border border-slate-200 bg-white p-5">
@@ -87,11 +89,20 @@
           </div>
           <div class="rounded-3xl border border-slate-200 bg-white p-5">
             <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">Telat pengembalian</p>
-            <p class="mt-3 text-3xl font-semibold text-rose-600">5</p>
+            <p class="mt-3 text-3xl font-semibold text-rose-600">{{ $jumlahTelat }}</p>
             <p class="mt-2 text-sm text-slate-500">Buku yang perlu segera dikembalikan.</p>
+
+            @if($jumlahTelat > 0)
+                <ul class="mt-3 text-sm text-rose-600">
+                    @foreach($telatTransaksi as $t)
+                        <li>• {{ $t->book->judul }} (kembali: {{ \Carbon\Carbon::parse($t->tanggal_kembali)->format('d M Y') }})</li>
+                    @endforeach
+                </ul>
+            @endif
           </div>
         </section>
 
+        <!-- Informasi & Buku terbaik -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
             <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500">Buku terbaik</p>
@@ -117,6 +128,7 @@
           </article>
         </section>
 
+        <!-- Transaksi terbaru -->
         <section class="rounded-3xl border border-slate-200 bg-white overflow-hidden">
           <div class="px-6 py-5 border-b border-slate-200 flex items-center justify-between">
             <div>
@@ -137,14 +149,20 @@
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-100">
-                <tr class="hover:bg-slate-50">
-                  <td class="px-6 py-4 font-medium text-slate-900">Belajar Laravel Dasar</td>
-                  <td class="px-6 py-4 text-sm text-slate-700">Teknologi</td>
-                  <td class="px-6 py-4 text-sm text-slate-600">05 Feb 2026</td>
-                  <td class="px-6 py-4">
-                    <span class="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">Dipinjam</span>
-                  </td>
-                </tr>
+                @foreach($transaksiTerbaru as $t)
+                  <tr class="hover:bg-slate-50">
+                    <td class="px-6 py-4 font-medium text-slate-900">{{ $t->book->judul }}</td>
+                    <td class="px-6 py-4 text-sm text-slate-700">{{ $t->book->kategori ?? '-' }}</td>
+                    <td class="px-6 py-4 text-sm text-slate-600">{{ \Carbon\Carbon::parse($t->tanggal_pinjam)->format('d M Y') }}</td>
+                    <td class="px-6 py-4">
+                      @if($t->status === 'dipinjam')
+                        <span class="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">Dipinjam</span>
+                      @else
+                        <span class="inline-flex items-center rounded-full bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700 ring-1 ring-slate-100">Dikembalikan</span>
+                      @endif
+                    </td>
+                  </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
