@@ -26,7 +26,7 @@
       <tbody>
         @forelse($transactions as $t)
         <tr class="border-t">
-          <td class="p-3">{{ $t->book->judul }}</td>
+          {{-- <td class="p-3">{{ $t->book->judul }}</td> --}}
           <td>{{ $t->status }}</td>
           <td>{{ \Carbon\Carbon::parse($t->tanggal_kembali)->format('d M Y') }}</td>
         </tr>

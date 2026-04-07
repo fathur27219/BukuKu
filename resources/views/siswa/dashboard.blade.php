@@ -46,7 +46,7 @@
               <p class="mt-3 text-sm text-slate-600">Periksa buku terbaru, lihat status pinjaman, dan pilih buku sesuai kategori serta deskripsi lengkap.</p>
             </div>
 
-            <div class="rounded-3xl bg-slate-900 p-5 text-white shadow-xl">
+            {{-- <div class="rounded-3xl bg-slate-900 p-5 text-white shadow-xl">
               <div class="flex items-center gap-3">
                 <div class="h-12 w-12 rounded-2xl bg-white/10 grid place-items-center text-slate-100">
                   <i class="fas fa-book fa-lg"></i>
@@ -57,7 +57,7 @@
                 </div>
               </div>
               <p class="mt-4 text-sm text-slate-300">Desain tampilan siswa dibuat lebih ringan, fokus pada buku, kategori, dan keterangan pinjaman.</p>
-            </div>
+            </div> --}}
           </div>
 
           <div class="mt-6 flex flex-wrap gap-3">
@@ -151,7 +151,7 @@
               <tbody class="divide-y divide-slate-100">
                 @foreach($transaksiTerbaru as $t)
                   <tr class="hover:bg-slate-50">
-                    <td class="px-6 py-4 font-medium text-slate-900">{{ $t->book->judul }}</td>
+                    <td class="px-6 py-4 font-medium text-slate-900">{{ $t->book->judul ?? '-'}}</td>
                     <td class="px-6 py-4 text-sm text-slate-700">{{ $t->book->kategori ?? '-' }}</td>
                     <td class="px-6 py-4 text-sm text-slate-600">{{ \Carbon\Carbon::parse($t->tanggal_pinjam)->format('d M Y') }}</td>
                     <td class="px-6 py-4">

@@ -40,7 +40,7 @@
                         </div>
                         <form method="GET" action="{{ url('/siswa/books') }}" class="w-full lg:w-auto">
                             <div class="flex gap-2">
-                                <input type="text" name="search" placeholder="Cari buku..." value="{{ request('search') }}"
+                                <input type="text" name="search" placeholder="Cari buku..."
                                     class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-200" />
                                 <button type="submit" class="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800">Cari</button>
                             </div>
